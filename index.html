@@ -1,0 +1,275 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Q4 Margin Maximizer Calculators</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Source+Sans+3:wght@400;600;700&display=swap">
+<style>
+/* Layout: one narrow reading column; guide text, then two live calculators, then Q4 playbook. Navy and gold from the ebook cover. */
+:root{
+  --bg:#F6F7FA; --surface:#FFFFFF; --ink:#0B2545; --muted:#52627A; --line:#D9DEE8;
+  --gold:#F2B705; --gold-ink:#0B2545; --good:#1E8449; --good-bg:#E4F4EA; --warn:#9A6B00; --warn-bg:#FFF1CC; --bad:#B3261E; --bad-bg:#FBE4E2;
+  --hero-bg:#0B2545; --hero-ink:#FFFFFF; --hero-sub:#C9D3E6;
+  --display:"Barlow Condensed","Arial Narrow",Impact,sans-serif; --body:"Source Sans 3",system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0A1B33; --surface:#102844; --ink:#EAF0FA; --muted:#9FB0CB; --line:#24406A;
+  --gold:#F2B705; --gold-ink:#0B2545; --good:#5BD18A; --good-bg:#12392A; --warn:#F5C84C; --warn-bg:#3D3210; --bad:#FF8F88; --bad-bg:#44211F;
+  --hero-bg:#071427; --hero-ink:#FFFFFF; --hero-sub:#B5C3DC; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0A1B33; --surface:#102844; --ink:#EAF0FA; --muted:#9FB0CB; --line:#24406A;
+  --gold:#F2B705; --gold-ink:#0B2545; --good:#5BD18A; --good-bg:#12392A; --warn:#F5C84C; --warn-bg:#3D3210; --bad:#FF8F88; --bad-bg:#44211F;
+  --hero-bg:#071427; --hero-ink:#FFFFFF; --hero-sub:#B5C3DC; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.55;margin:0}
+.wrap{max-width:760px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.hero{background:var(--hero-bg);color:var(--hero-ink);padding-block:36px 40px}
+.kicker{font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);font-weight:700;margin:0 0 10px}
+h1{font-family:var(--display);font-weight:700;font-size:clamp(40px,10vw,68px);line-height:.95;margin:0 0 14px;text-transform:uppercase;text-wrap:balance}
+h1 em{font-style:normal;color:var(--gold)}
+.hero p{color:var(--hero-sub);margin:0;max-width:56ch}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
+.chips span{border:1px solid var(--gold);color:var(--hero-ink);border-radius:999px;padding:4px 12px;font-size:14px}
+section{padding-block:34px 6px}
+h2{font-family:var(--display);font-weight:700;font-size:clamp(28px,6vw,38px);line-height:1.05;margin:0 0 12px;text-transform:uppercase;text-wrap:balance}
+h3{font-size:18px;margin:0 0 6px}
+p{margin:0 0 14px;max-width:65ch}
+.muted{color:var(--muted);font-size:15px}
+.trap{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:16px 0}
+.trap div{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px}
+.trap b{display:block;font-family:var(--display);font-size:30px;line-height:1}
+.trap small{color:var(--muted);font-size:13px}
+.formula{background:var(--surface);border:1px solid var(--line);border-left:5px solid var(--gold);padding:12px 16px;border-radius:6px;font-weight:600;overflow-x:auto}
+.formula span{display:block;font-weight:400;color:var(--muted);font-size:15px;margin-top:4px}
+.calc{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px;margin-top:14px}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+label{display:block;font-size:14px;font-weight:600;color:var(--muted);margin-bottom:4px}
+input,select{width:100%;font:inherit;font-size:17px;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:10px 12px;min-width:0;font-variant-numeric:tabular-nums}
+input:focus-visible,select:focus-visible,button:focus-visible{outline:3px solid var(--gold);outline-offset:1px}
+.out{margin-top:16px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.big{grid-column:1/-1;background:var(--hero-bg);color:var(--hero-ink);border-radius:12px;padding:16px}
+.big small{color:var(--hero-sub);display:block;font-size:14px}
+.big b{font-family:var(--display);font-size:clamp(40px,11vw,60px);line-height:1;color:var(--gold);font-variant-numeric:tabular-nums}
+.big .sub{font-size:16px;color:var(--hero-ink);margin-top:4px}
+.stat{border:1px solid var(--line);border-radius:10px;padding:10px 12px}
+.stat small{display:block;color:var(--muted);font-size:13px}
+.stat b{font-size:19px;font-variant-numeric:tabular-nums}
+.pill{grid-column:1/-1;border-radius:10px;padding:10px 14px;font-weight:600}
+.pill.good{background:var(--good-bg);color:var(--good)} .pill.warn{background:var(--warn-bg);color:var(--warn)} .pill.bad{background:var(--bad-bg);color:var(--bad)}
+.scroll{overflow-x:auto;margin-top:14px}
+table{border-collapse:collapse;width:100%;min-width:420px;font-variant-numeric:tabular-nums;font-size:16px}
+th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line)}
+th{font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.tip{display:grid;gap:12px;margin-top:10px}
+.tip div{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+.tip p{margin:0}
+.cta{background:var(--gold);color:var(--gold-ink);border-radius:14px;padding:22px;margin-block:34px}
+.cta h2{margin-bottom:6px}.cta p{margin:0}
+footer{padding-block:6px 40px;color:var(--muted);font-size:14px}
+.ex{font-size:13px;color:var(--muted);margin:10px 0 0}
+.ad{background:var(--hero-bg);color:var(--hero-ink);border-radius:14px;padding:24px;margin-block:34px}
+.ad h2{margin-bottom:8px}.ad h2 em{font-style:normal;color:var(--gold)}
+.ad ul{margin:0 0 16px;padding-left:20px;color:var(--hero-sub)}
+.ad li{margin-bottom:4px}
+.ad label{color:var(--hero-sub)}
+.ad input,.ad select{background:var(--surface);color:var(--ink)}
+.btn{display:inline-block;background:var(--gold);color:var(--gold-ink);font:inherit;font-weight:700;font-size:18px;border:0;border-radius:10px;padding:14px 22px;cursor:pointer;text-decoration:none;text-align:center}
+.ad .grid{margin-bottom:14px}
+.done{margin-top:16px;border:1px solid var(--gold);border-radius:10px;padding:14px 16px}
+.done p{margin:0 0 10px}
+.contact{margin-top:14px;font-size:15px;color:var(--hero-sub)}
+.contact a{color:var(--gold)}
+.err{color:var(--gold);font-weight:600;margin:8px 0 0}
+@media (max-width:520px){.grid,.out{grid-template-columns:1fr}.trap{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+<header class="hero"><div class="wrap">
+  <p class="kicker">Free Q4 toolkit for retailers</p>
+  <h1>Max Safe Discount <em>&amp; Ad Spend Margin</em> Calculators</h1>
+  <p>Know the lowest price you can charge and the most you can spend on ads this Black Friday and Christmas, before you lose money on a sale.</p>
+  <div class="chips"><span>2 live calculators</span><span>Works in ₦ $ £ €</span><span>Takes about 60 seconds</span></div>
+</div></header>
+
+<main class="wrap">
+
+<section>
+  <h2>Why guessing a discount costs more than you think</h2>
+  <p>A discount comes out of your profit, not your sales. A product costs ₦50,000 and sells for ₦100,000, so you keep ₦50,000. You run a 30% flash sale.</p>
+  <div class="trap">
+    <div><b>₦70,000</b><small>new selling price</small></div>
+    <div><b>₦20,000</b><small>profit left (was ₦50,000)</small></div>
+    <div><b>-60%</b><small>of your profit gone</small></div>
+  </div>
+  <p>To earn the same total profit at that price you must sell 2.5 times as many units. Before you cut a price, work out the floor.</p>
+  <div class="formula">Floor price = Total cost per unit ÷ (1 − Target margin)
+    <span>Max Safe Discount = 1 − Floor price ÷ Normal price</span></div>
+  <p class="muted" style="margin-top:12px">Margin here means profit as a share of the selling price. Total cost includes what you paid for the item plus packaging, delivery and payment fees for that sale.</p>
+</section>
+
+<section id="discount">
+  <h2>1. Max Safe Discount calculator</h2>
+  <p>Enter one product. The calculator shows the deepest discount that still keeps the profit margin you chose.</p>
+  <div class="calc">
+    <div class="grid">
+      <div><label for="cur">Currency</label>
+        <select id="cur"><option value="₦">₦ Naira</option><option value="$">$ Dollar</option><option value="£">£ Pound</option><option value="€">€ Euro</option><option value="">No symbol</option></select></div>
+      <div><label for="price">Normal selling price</label><input id="price" type="number" inputmode="decimal" min="0" value="25000"></div>
+      <div><label for="cost">What the item costs you</label><input id="cost" type="number" inputmode="decimal" min="0" value="14000"></div>
+      <div><label for="extra">Other cost per sale (packaging, delivery, fees)</label><input id="extra" type="number" inputmode="decimal" min="0" value="1500"></div>
+      <div><label for="target">Margin you must keep (%)</label><input id="target" type="number" inputmode="decimal" min="0" max="95" value="20"></div>
+      <div><label for="plan">Discount you plan to offer (%)</label><input id="plan" type="number" inputmode="decimal" min="0" max="95" value="15"></div>
+    </div>
+    <div class="out" id="out1" aria-live="polite"></div>
+    <div class="scroll"><table id="tbl1"></table></div>
+    <p class="ex">Starting figures are an example. Replace them with your own.</p>
+  </div>
+</section>
+
+<section id="ads">
+  <h2>2. Q4 ad spend margin calculator</h2>
+  <p>Q4 ads cost more per click, so your margin decides how much you can pay for each order. Enter your average order and your ad budget.</p>
+  <div class="calc">
+    <div class="grid">
+      <div><label for="aov">Average order value</label><input id="aov" type="number" inputmode="decimal" min="0" value="25000"></div>
+      <div><label for="ocost">Total cost of that order (item, packaging, delivery, fees)</label><input id="ocost" type="number" inputmode="decimal" min="0" value="15500"></div>
+      <div><label for="tprofit">Profit you want per order, after ads</label><input id="tprofit" type="number" inputmode="decimal" min="0" value="2000"></div>
+      <div><label for="budget">Ad budget for the season</label><input id="budget" type="number" inputmode="decimal" min="0" value="100000"></div>
+    </div>
+    <div class="out" id="out2" aria-live="polite"></div>
+    <p class="ex">Currency follows the selector in calculator 1. Starting figures are an example.</p>
+  </div>
+  <div class="formula" style="margin-top:16px">Break-even ROAS = 1 ÷ margin per order
+    <span>Max ad cost per order (break-even) = Order value − Total cost. Target ad cost per order = that, minus the profit you want.</span></div>
+</section>
+
+<section>
+  <h2>3 ways to use your safe number in Q4</h2>
+  <div class="tip">
+    <div><h3>Tiered unlock</h3><p>Give 10% off orders above one amount, 15% off above a higher amount, and keep the full safe discount for your highest order tier only.</p></div>
+    <div><h3>Flash window</h3><p>Run the deepest discount for a few hours only. Urgency brings the buyers, and the short window protects your normal price.</p></div>
+    <div><h3>Bundle and save</h3><p>Pair a high-margin item with a slow one and apply the discount to the bundle. Check the bundle with the calculator, not each item.</p></div>
+  </div>
+</section>
+
+<section>
+  <h2>Before you launch any Q4 promo</h2>
+  <p>1. Run each product you plan to discount through calculator 1.<br>
+     2. Never publish a price below its floor.<br>
+     3. Set your ad spend with calculator 2 before you boost a post.<br>
+     4. Check sell-through every week. A product under 40% sold by week 4 needs action, not hope.</p>
+</section>
+
+<div class="ad" id="get">
+  <h2>Get the full <em>Q4 Retail Profit Margin Maximizer</em></h2>
+  <p style="color:var(--hero-sub)">Stop blind discounting. Protect every sale this Black Friday and Christmas season. Built for online sellers, boutiques and retail shops.</p>
+  <ul>
+    <li>7 chapters plus a bonus template</li>
+    <li>Excel calculator and dashboard</li>
+    <li>Black Friday swipe files and supplier scripts</li>
+    <li>Works in Naira, Dollar, Pound, Euro and more</li>
+  </ul>
+  <form id="lead" novalidate>
+    <div class="grid">
+      <div><label for="lname">Your name</label><input id="lname" type="text" autocomplete="name"></div>
+      <div><label for="lbiz">What do you sell?</label><input id="lbiz" type="text" placeholder="e.g. fabrics, shoes, phones"></div>
+    </div>
+    <button class="btn" type="submit" id="lbtn">Download Q4 MAXIMIZER</button>
+    <p class="err" id="lerr" hidden>Enter your name so we know who to send it to.</p>
+  </form>
+  <div class="done" id="ldone" hidden>
+    <p>Almost done. Tap below to message us on WhatsApp. Your name and business are already filled in. Send the message and we will reply with your copy.</p>
+    <a class="btn" id="lwa" href="https://wa.me/2348058331323" target="_blank" rel="noopener">Continue on WhatsApp</a>
+  </div>
+  <p class="contact">Prefer to ask first? WhatsApp <a href="https://wa.me/2348058331323" target="_blank" rel="noopener">+234 805 833 1323</a> or email 5adroeak1org@gmail.com</p>
+</div>
+
+<footer>These calculators give estimates from the numbers you enter. They do not include tax, and real results depend on your sales and costs. All starting figures are examples.</footer>
+</main>
+
+<script>
+(function(){
+  var $=function(id){return document.getElementById(id)};
+  function num(id){var v=parseFloat($(id).value);return isFinite(v)?v:0}
+  function sym(){return $("cur").value}
+  function money(n){
+    var s=Math.abs(n).toLocaleString("en-US",{maximumFractionDigits:0});
+    return (n<0?"-":"")+sym()+s;
+  }
+  function pct(n,d){return (n*100).toLocaleString("en-US",{maximumFractionDigits:d==null?1:d})+"%"}
+  function stat(l,v){return '<div class="stat"><small>'+l+'</small><b>'+v+'</b></div>'}
+
+  function calc1(){
+    var P=num("price"),c=num("cost")+num("extra"),m=Math.min(num("target"),95)/100,d=Math.min(num("plan"),95)/100;
+    var out=$("out1"),tbl=$("tbl1");
+    if(P<=0){out.innerHTML='<div class="pill warn">Enter a selling price above zero.</div>';tbl.innerHTML="";return}
+    var gm=(P-c)/P,floor=c/(1-m),room=1-floor/P;
+    var html="";
+    if(room<=0){
+      html+='<div class="big"><small>Max safe discount</small><b>0%</b><div class="sub">Your price is already at or below the floor of '+money(floor)+'.</div></div>';
+    }else{
+      html+='<div class="big"><small>Max safe discount</small><b>'+pct(room)+'</b><div class="sub">Do not sell below '+money(floor)+'</div></div>';
+    }
+    html+=stat("Current margin",pct(gm))+stat("Profit per unit now",money(P-c));
+    var np=P*(1-d),pr=np-c,nm=np>0?pr/np:0;
+    html+=stat("Price at your discount",money(np))+stat("Profit per unit then",money(pr));
+    var cls,msg;
+    if(pr<0){cls="bad";msg="At "+pct(d,0)+" off you lose "+money(-pr)+" on every unit. Do not run this discount."}
+    else if(nm<m){cls="warn";msg="At "+pct(d,0)+" off your margin falls to "+pct(nm)+", below your "+pct(m,0)+" target. Stay under "+pct(Math.max(room,0))+"."}
+    else{cls="good";msg="At "+pct(d,0)+" off you keep a "+pct(nm)+" margin, above your "+pct(m,0)+" target."}
+    if(pr>0&&P-c>0){var need=(P-c)/pr;html+=stat("Units to sell to match today's profit",need.toLocaleString("en-US",{maximumFractionDigits:2})+" times as many")}
+    else html+=stat("Units to sell to match today's profit","Not possible")
+    html+='<div class="pill '+cls+'">'+msg+'</div>';
+    out.innerHTML=html;
+    var rows='<tr><th>Discount</th><th>New price</th><th>Profit per unit</th><th>Sales needed to match today</th></tr>';
+    [5,10,15,20,25,30,40].forEach(function(x){
+      var p=P*(1-x/100),pf=p-c,n;
+      if(pf<=0)n="Never (loss)";else if(P-c<=0)n="n/a";else n=((P-c)/pf*100-100).toLocaleString("en-US",{maximumFractionDigits:0})+"% more";
+      rows+='<tr><td>'+x+'%</td><td>'+money(p)+'</td><td>'+money(pf)+'</td><td>'+n+'</td></tr>';
+    });
+    tbl.innerHTML=rows;
+  }
+
+  function calc2(){
+    var A=num("aov"),c=num("ocost"),tp=num("tprofit"),b=num("budget"),out=$("out2");
+    if(A<=0){out.innerHTML='<div class="pill warn">Enter an average order value above zero.</div>';return}
+    var cm=(A-c)/A,room=A-c,html="";
+    if(room<=0){
+      out.innerHTML='<div class="big"><small>Break-even ROAS</small><b>n/a</b><div class="sub">Your costs are at or above the order value. Ads will lose money until you raise the price or cut costs.</div></div>';return}
+    var be=1/cm;
+    html+='<div class="big"><small>Break-even ROAS</small><b>'+be.toLocaleString("en-US",{maximumFractionDigits:2})+'x</b><div class="sub">Every '+money(1)+' of ads must bring back at least '+be.toLocaleString("en-US",{maximumFractionDigits:2})+' in sales just to break even.</div></div>';
+    html+=stat("Margin per order",pct(cm))+stat("Max ad cost per order (break-even)",money(room));
+    var tcpa=room-tp;
+    if(tcpa>0){
+      var tr=A/tcpa;
+      html+=stat("Ad cost per order for your profit goal",money(tcpa))+stat("Target ROAS for your profit goal",tr.toLocaleString("en-US",{maximumFractionDigits:2})+"x");
+      html+=stat("Sales your budget must bring (break-even)",money(b*be))+stat("Sales your budget must bring (profit goal)",money(b*tr));
+      html+='<div class="pill good">With a '+money(b)+' budget, aim for about '+Math.ceil(b/tcpa).toLocaleString("en-US")+' orders at '+money(tcpa)+' ad cost each to reach your profit goal.</div>';
+    }else{
+      html+=stat("Ad cost per order for your profit goal","None left");
+      html+=stat("Sales your budget must bring (break-even)",money(b*be));
+      html+='<div class="pill bad">Your profit goal of '+money(tp)+' per order is higher than the '+money(room)+' you have to spend on ads. Lower the goal, raise the price or cut costs.</div>';
+    }
+    out.innerHTML=html;
+  }
+
+  function run(){calc1();calc2()}
+  ["cur","price","cost","extra","target","plan","aov","ocost","tprofit","budget"].forEach(function(id){
+    $(id).addEventListener("input",run);$(id).addEventListener("change",run);
+  });
+  run();
+})();
+(function(){
+  var f=document.getElementById("lead");if(!f)return;
+  f.addEventListener("submit",function(e){
+    e.preventDefault();
+    var n=document.getElementById("lname").value.trim(),b=document.getElementById("lbiz").value.trim();
+    var err=document.getElementById("lerr");
+    if(!n){err.hidden=false;return}
+    err.hidden=true;
+    var t="Hi, my name is "+n+(b?" and I sell "+b:"")+". Please send me the Q4 MAXIMIZER (Q4 Retail Profit Margin Maximizer).";
+    document.getElementById("lwa").href="https://wa.me/2348058331323?text="+encodeURIComponent(t);
+    document.getElementById("ldone").hidden=false;
+  });
+})();
+</script>
+
+</body></html>
