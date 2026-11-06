@@ -80,6 +80,13 @@ footer{padding-block:6px 40px;color:var(--muted);font-size:14px}
 .err{color:var(--gold);font-weight:600;margin:8px 0 0}
 @media (max-width:520px){.grid,.out{grid-template-columns:1fr}.trap{grid-template-columns:1fr}}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
+  .download-btn {
+  display: inline-block;       /* Mimics button layout behavior */
+  box-sizing: border-box;     /* Includes padding in total width/height */
+  text-decoration: none;      /* Removes default underline from the link */
+  text-align: center;         /* Centers the text inside the link */
+  cursor: pointer;            /* Ensures the pointer finger icon appears */
+}
 </style>
 
 <header class="hero"><div class="wrap">
@@ -172,7 +179,7 @@ footer{padding-block:6px 40px;color:var(--muted);font-size:14px}
       <div><label for="lname">Your name</label><input id="lname" type="text" autocomplete="name"></div>
       <div><label for="lbiz">What do you sell?</label><input id="lbiz" type="text" placeholder="e.g. fabrics, shoes, phones"></div>
     </div>
-    <button class="btn" type="submit" id="lbtn">Download Q4 MAXIMIZER</button>
+    <a href="https://nestuge.com/q4retailprofitmarginmaximizer" class="btn download-btn" id="lbtn" target="_blank" rel="noopener noreferrer">Download Q4 MAXIMIZER</a>
     <p class="err" id="lerr" hidden>Enter your name so we know who to send it to.</p>
   </form>
   <div class="done" id="ldone" hidden>
